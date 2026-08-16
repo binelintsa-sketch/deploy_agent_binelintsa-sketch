@@ -27,18 +27,18 @@ cp assets.csv config.json "attendance_tracker_${DIR_NAME}/Helpers/"
 cp reports.log "attendance_tracker_${DIR_NAME}/reports/"
 
 #ask the user if he wants to update the threshold values
-read -p "Do you want to update attendance thresholds? (y/n): "Choice"
+read -p "Do you want to update attendance thresholds? (y/n): " Choice
 
 #check if the answer is "y" or "Y"
 if [[ "$Choice" =~ ^[Yy]$ ]]; then
 
 	#the user will prompt the new valeus using read if based on his choice
-	read -p "Enter Warning threshold (default 75%): " WARN_VAL
-	read -p "Enter Failure threshold (default 50%): " FAIL_VAL
+	read -p "Enter Warning threshold (default 75): " WARN_VAL
+	read -p "Enter Failure threshold (default 50): " FAIL_VAL
 
 	#if n values where entered the code will find default numbers in config.json using sed -i
-	sed -i "s/75/$WARN_VAL}/g" "attendance_tracker_${DIR_NAME}/Helpers/config.json"
-	sed -i "s/50/$FAIL_VAL}/g" "attendance_tracker_${DIR_NAME}/Helpers/config.json"
+	sed -i "s/75/${WARN_VAL}/g" "attendance_tracker_${DIR_NAME}/Helpers/config.json"
+	sed -i "s/50/${FAIL_VAL}/g" "attendance_tracker_${DIR_NAME}/Helpers/config.json"
 	echo "Thresholds values updated succesfully."
 else
 	echo "default values retained."
