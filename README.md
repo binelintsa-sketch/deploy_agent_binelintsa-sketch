@@ -38,3 +38,8 @@ If you make a mistake or need to cancel setup mid-way, press Ctrl + C. The SIGIN
 
 process interrupted! saving and cleaning up...
 Action taken: The incomplete attendance_tracker_<name> directory is deleted from your workspace and saved as attendance_tracker_<name>_archive.tar.gz. 
+
+video demonstration: You can watch the full walkthrough of the script execution and interruption trap here:
+[Watch the Ptoject demonstration](https://youtu.be/Lv4XLVUseHg)
+
+Thank you.
