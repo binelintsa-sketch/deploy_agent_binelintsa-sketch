@@ -1,14 +1,28 @@
 Deploy_agent_binelintsa-sketch
-Project Setup and Process Automation
 
-Script Automation. 
+Project Setup and Process Automation 
 
-#Overview
- setup_project.sh automates the initialization of attendance tracking systems. It creates parent directory (attendance_tracker_(name) and sub-directory structures(helpers and reports). The script will prompt the user if he wants to update the threshold values of attendance tracker found in config.json by asking entering yes  (y) or No (Y). if the answer is yes the user will prompt the warning and failure values else the script will skip this step and used the default values using the sed -i command. this will configures the environment thresholds, and finally  verifies if python3 is installed on the system. The code os built in with a SIGINT in case you started your setup with a wrong name or you just want to delete everything.
+#Project overview
 
-#Expected result; After running the script, the output should look like this.
+setup_project.sh is an automated Bash script designed to quickly initialize and configure an isolated attendance tracking workspace. It builds a standardized directory structure, copies core dependency files, dynamically manages system thresholds, and includes signal interruption handling to prevent partial setups.
 
-attendance_tracker_<name> /
+#What the Script Does
+
+*Creates Directory Structure: Prompts for a project identifier and sets up the root project folder attendance_tracker_<name>/ along with its subdirectories (Helpers/ and reports/).
+
+*Deploys Starter Files: Automatically copies key assets (attendance_checker.py, assets.csv, config.json, and reports.log) into their respective folders.
+
+*Threshold Configuration: Asks if you want to update the default attendance thresholds (y/n). If yes, it prompts for custom Warning and Failure values and updates config.json in-place using sed -i. If no, default values are preserved.
+
+*Environment status Check: Verifies that python3 is installed and running on the target environment.
+
+*Process Interruption Safety (SIGINT): Built-in signal handling catches Ctrl + C during execution. If interrupted mid-setup, the script automatically archives the partial directory as attendance_tracker_<name>_archive.tar.gz and removes the incomplete folder to keep your workspace clean.
+
+#Expected Directory Structure
+
+After a successful execution, The project directory will look like this:
+
+attendance_tracker_<name>/
 ├── attendance_checker.py
 ├── Helpers/
 │   ├── assets.csv
@@ -16,5 +30,11 @@ attendance_tracker_<name> /
 └── reports/
     └── reports.log
 
-#How does the SIGINT function
-In case the user changed his mind or a trigger happens the user user can press Ctrl+c and the created directory will be automatically deleted and save as an archive (attendance_tracker_(name)_archive.Zip. Thus it deletes directory that is incomplete.
+# To make the script executable, use the command chmod and ru ./setup_project.sh, enter your directory name and take the option to enter your threshold valeus or not. 
+
+#Interruption Handling (Ctrl + C)
+
+If you make a mistake or need to cancel setup mid-way, press Ctrl + C. The SIGINT trap will immediately trigger:
+
+process interrupted! saving and cleaning up...
+Action taken: The incomplete attendance_tracker_<name> directory is deleted from your workspace and saved as attendance_tracker_<name>_archive.tar.gz. 
